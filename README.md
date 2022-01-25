@@ -1,1 +1,2 @@
-# knowledge_commons_ABM
+# Agent-based model simulation of Knowledge Commons
+This is a simulation of the emergence of Knowledge Commons in a community of agents
