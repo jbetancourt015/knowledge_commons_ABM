@@ -43,14 +43,6 @@ class Population(object):
         This function initializes the population object.
 
         '''
-        self.agents = agents
-        self.groups = groups
-    
-    def initialize(self):
-        '''
-        This function initializes the model population.
-
-        '''
         # Create agent list
         agents = []
         Na = Params.N_agents

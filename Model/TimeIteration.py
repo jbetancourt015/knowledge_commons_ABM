@@ -15,3 +15,17 @@ contributors:
         email:      jose.betancourtvalencia@yale.edu
 -------------------------------------------------------------------------------
 """
+import Params
+
+class Simulation(object):
+    def __init__(self):
+        '''
+        This function initializes the simulation object
+        '''
+        self.time = 0
+    
+    def iterate(self, agents, groups, record):
+        '''
+        This function advances the simulation one time step.
+        '''
+        self.time += 1

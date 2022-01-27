@@ -32,9 +32,17 @@ class Record(object):
         for agent in agents:
             self.attributes.append([agent.x, agent.y, agent.z])
     
+    def get_membership(self, agents):
+        '''
+        This function extracts the groups to which a set of agents belongs.
+        '''
+        group_list = [agent.group for agent in agents]
+        self.membership.append(group_list)
+        
+    
     def write_output(self):
         '''
         This function outputs the information stored in the record.
         '''
-        np.save('Output/Attributes', self.attributes)
-        np.save('Output/Membership', self.membership)
+        np.save('Output/Attributes', np.array(self.attributes))
+        np.save('Output/Membership', np.array(self.membership))
