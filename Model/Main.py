@@ -16,11 +16,8 @@ contributors:
         email:      jose.betancourtvalencia@yale.edu
 -------------------------------------------------------------------------------
 """
-import Params
-import Agent
 import Generator
 import TimeSeries
-import Output
 
 #------------------------------------------------------------------------------
 # SIMULATION
@@ -33,10 +30,12 @@ def simulate():
     population = Generator.Population()
     print('Initialization complete')
     # Initialize timeSeries object
-    timeSeries = TimeSeries.TimeSeries()
+    record = TimeSeries.Record()
     # Extract agents and groups
     agents = population.agents
     groups = population.groups
     # Run simulation
-    Generator.run_simulation(agents, groups, timeSeries)
+    Generator.run_simulation(agents, groups, record)
+    # Write output
+    record.write_output()
     print('Simulation complete')

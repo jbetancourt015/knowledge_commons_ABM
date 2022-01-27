@@ -78,10 +78,11 @@ class Population(object):
 #------------------------------------------------------------------------------
 # SIMULATION
 #------------------------------------------------------------------------------
-def run_simulation(agents, groups, timeSeries):
+def run_simulation(agents, groups, record):
     '''
     This function runs the simulation with the initialized agents.
     '''
     my_simulation = TimeIteration.Simulation()
+    record.get_attributes(agents)
     while my_simulation.time < Params.T:
-        my_simulation.iterate(agents, groups, timeSeries)
+        my_simulation.iterate(agents, groups, record)
