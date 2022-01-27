@@ -5,7 +5,7 @@ created on:
     Sun 16 Jan 2022
 -------------------------------------------------------------------------------
 last change:
-    Sun 16 Jan 2022
+    Wed 26 Jan 2022
 -------------------------------------------------------------------------------
 notes:
 -------------------------------------------------------------------------------
@@ -15,8 +15,14 @@ contributors:
         email:      jose.betancourtvalencia@yale.edu
 -------------------------------------------------------------------------------
 """
+# General parameters
 N_agents = 100
-N_networks = 3
+N_groups = 3
+T = 100
+
+# Distributional parameters
+sx = 10
+sy = 10
 
 mean_neighbors = 5
 max_neighbors = 15

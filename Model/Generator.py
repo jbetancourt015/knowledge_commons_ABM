@@ -5,7 +5,7 @@ created on:
     Sun 16 Jan 2022
 -------------------------------------------------------------------------------
 last change:
-    Sun 16 Jan 2022
+    Wed 26 Jan 2022
 -------------------------------------------------------------------------------
 notes:
 -------------------------------------------------------------------------------
@@ -17,41 +17,71 @@ contributors:
 """
 import Params
 import Agents
+import Groups
+import TimeIteration
 import numpy as np
+
+#------------------------------------------------------------------------------
+# AUXILIARY FUNCTIONS
+#------------------------------------------------------------------------------
+def generate_attributes():
+    '''
+    This function creates agent attributes according to the specified 
+    distributions.
+    '''
+    x = np.random.beta(Params.sx, Params.sx)
+    y = np.random.beta(Params.sy, Params.sy)
+    z = np.random.rand()
+    return x, y, z
 
 #------------------------------------------------------------------------------
 # GENERATION
 #------------------------------------------------------------------------------
 class Population(object):
-    def __init__(self, agents=None):
+    def __init__(self, agents=None, groups=None):
         '''
         This function initializes the population object.
 
         '''
         self.agents = agents
+        self.groups = groups
     
     def initialize(self):
         '''
         This function initializes the model population.
 
         '''
-        # Create agent population
+        # Create agent list
         agents = []
         Na = Params.N_agents
         for i in range(Na):
-            opinion = np.random.rand()
-            agent = Agents.Agent(ident=i, opinion=opinion)
+            x, y, z = generate_attributes()
+            agent = Agents.Agent(ident=i, x=x, y=y, z=z)
             agents.append(agent)
         self.agents = agents
-        # Create network interactions
-        Ng = Params.N_networks
-        n_mean = Params.mean_neighbors
-        n_max = Params.max_neighbors
-        for i in range(Na):
-            neighbors = []
-            for n in range(Ng):
-                choice_set = np.delete(np.arange(Na), i)
-                neighbors_g = np.random.choice(choice_set, min(np.random.poisson(n_mean), n_max))
-                neighbors.append(neighbors_g)
-            agents[i].create_neighbors(neighbors)
-                
+        # Generate group list
+        groups = []
+        Ng = Params.N_groups
+        for g in range(Ng):
+            group = Groups.Group()
+            groups.append(group)
+        self.groups = groups
+        # Assign agents to groups
+        for agent in agents:
+            g = np.random.choice(np.arange(Ng+1))
+            if g < Ng:
+                agent.group = groups[g]
+                groups[g].members.append(agent)
+            else:
+                agent.group = None
+
+#------------------------------------------------------------------------------
+# SIMULATION
+#------------------------------------------------------------------------------
+def run_simulation(agents, groups, timeSeries):
+    '''
+    This function runs the simulation with the initialized agents.
+    '''
+    my_simulation = TimeIteration.Simulation()
+    while my_simulation.time < Params.T:
+        my_simulation.iterate(agents, groups, timeSeries)
