@@ -20,9 +20,23 @@ import Params
 import Agent
 import Generator
 import TimeIteration
+import Output
 
 #------------------------------------------------------------------------------
 # INITIALIZATION
 #------------------------------------------------------------------------------
-# Initialize agents
-population = Generator.Population()
+def simulate():
+    '''
+    This function initializes and runs the simulation.
+    '''
+    # Initialize agents
+    population = Generator.Population()
+    print('Initialization complete')
+    # Initialize timeSeries object
+    timeSeries = TimeIteration.TimeSeries()
+    # Extract agents and groups
+    agents = population.agents
+    groups = population.groups
+    # Run simulation
+    Generator.run_simulation(agents, groups, timeSeries)
+    print('Simulation complete')
