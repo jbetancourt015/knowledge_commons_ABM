@@ -19,13 +19,15 @@ import Params
 import numpy as np
 
 class Group(object):
-    def __init__(self):
+    def __init__(self, ident):
         '''
         This function initializes the group.
         '''
+        self.ident = ident
         self.members = []
         self.span = 0
         self.payoff = 0
+        self.avg_int = 0.5
     
     def update_span(self):
         '''
@@ -53,7 +55,8 @@ class Group(object):
         '''
         This function calculates the baseline payoff of working in the group.
         '''
-        self.update_span(self)
+        self.update_span()
         x_vals = [agent.x for agent in self.members]
         z_vals = [agent.z for agent in self.members]
+        self.avg_int = np.mean(x_vals) if len(self.members) > 0 else 0.5
         self.payoff = Params.f(np.mean(x_vals))*self.span*np.mean(z_vals) if len(self.members) > 0 else 0

@@ -26,6 +26,7 @@ sy = 10
 
 # Payoff parameters
 eps = 0.025
+beta = 0.1
 
 def f(x):
     '''

@@ -55,7 +55,7 @@ class Population(object):
         groups = []
         Ng = Params.N_groups
         for g in range(Ng):
-            group = Groups.Group()
+            group = Groups.Group(ident=g)
             groups.append(group)
         self.groups = groups
         # Assign agents to groups

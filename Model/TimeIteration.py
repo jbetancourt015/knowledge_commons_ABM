@@ -16,6 +16,7 @@ contributors:
 -------------------------------------------------------------------------------
 """
 import Params
+import numpy as np
 
 class Simulation(object):
     def __init__(self):
@@ -33,4 +34,22 @@ class Simulation(object):
         # Update group payoffs
         for group in groups:
             group.update_payoffs()
+        # Agent's decisions
+        for agent in agents:
+            # Update probing status
+            agent.update_probe()
+            agent.update_payoff()
+            # Agents decide whether to move out of a group
+            agent.choose_isolate()
+            # Agents go into the probing stage
+            agent.check_probe()
+            if agent.probe_curr:
+                if agent.group != None:
+                    agent.group.members.remove(agent)
+                new_group = np.random.choice(groups)
+                agent.group = new_group
+                new_group.members.append(agent)
+            # Previously probing agents decide whether to go back
+            agent.probe_return()
+        # Update time
         self.time += 1
