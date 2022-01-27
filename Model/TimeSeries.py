@@ -36,7 +36,7 @@ class Record(object):
         '''
         This function extracts the groups to which a set of agents belongs.
         '''
-        group_list = [agent.group for agent in agents]
+        group_list = [(agent.group.ident if agent.group!=None else -1) for agent in agents]
         self.membership.append(group_list)
         
     
