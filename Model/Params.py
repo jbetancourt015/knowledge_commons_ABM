@@ -24,5 +24,11 @@ T = 100
 sx = 10
 sy = 10
 
-mean_neighbors = 5
-max_neighbors = 15
+# Payoff parameters
+eps = 0.025
+
+def f(x):
+    '''
+    This is the fitness function.
+    '''
+    return 1

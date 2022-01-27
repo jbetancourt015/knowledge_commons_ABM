@@ -28,4 +28,9 @@ class Simulation(object):
         '''
         This function advances the simulation one time step.
         '''
+        # Update membership record
+        record.get_membership(agents)
+        # Update group payoffs
+        for group in groups:
+            group.update_payoffs()
         self.time += 1
