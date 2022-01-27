@@ -19,7 +19,7 @@ contributors:
 import Params
 import Agent
 import Generator
-import TimeIteration
+import TimeSeries
 import Output
 
 #------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ def simulate():
     population = Generator.Population()
     print('Initialization complete')
     # Initialize timeSeries object
-    timeSeries = TimeIteration.TimeSeries()
+    timeSeries = TimeSeries.TimeSeries()
     # Extract agents and groups
     agents = population.agents
     groups = population.groups
